@@ -14,17 +14,12 @@ $db       = $database->getConnection();
 
 $entity = new User($db);
 
-// Test before Front-end
-//$mail     = 'admin@admin.fr';
-//$password = 'admin';
 $data = json_decode(file_get_contents("php://input"));
 
-$mail     = $data->email;
+$email    = $data->email;
 $password = $data->password;
 
-echo $mail.' // '.$password;
-
-$stmt = $entity->read($mail, $password);
+$stmt = $entity->read($email, $password);
 $num  = $stmt->rowCount();
 
 if ($num > 0) {
@@ -35,9 +30,8 @@ if ($num > 0) {
         extract($row);
 
         $uniqueResponse = [
-            'id'       => $id,
-            'mail'     => $mail,
-            'is_admin' => $is_admin,
+            'email'   => $email,
+            'isAdmin' => $is_admin,
         ];
 
         array_push($response['results'], $uniqueResponse);

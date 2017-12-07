@@ -1,16 +1,19 @@
 <template>
   <div id="app">
 
-    <!--Header-->
-    <CustomHeader></CustomHeader>
-    <!--Header-->
+    <div class="app-container">
+      <!--Header-->
+      <CustomHeader></CustomHeader>
+      <!--Header-->
 
-    <div class="container">
-      <transition name="bodyTransition" appear>
-        <router-view/>
-      </transition>
+      <div class="container">
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
+                    leave-active-class="animated zoomOut">
+          <router-view/>
+        </transition>
+      </div>
+
     </div>
-
     <!--Footer-->
     <CustomFooter></CustomFooter>
     <!--Footer-->
@@ -29,18 +32,19 @@
 
 <style lang="scss">
   @import 'style/main';
-</style>
 
-<style lang="scss" scoped>
-  .bodyTransition-enter-active, bodyTransition-leave-active {
-    -webkit-transition: 1s all;
-    -moz-transition: 1s all;
-    -ms-transition: 1s all;
-    -o-transition: 1s all;
-    transition: 1s all;
+  body {
+    #app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      .app-container {
+        flex-grow: 1;
+      }
+    }
   }
 
-  .bodyTransition-enter, .bodyTransition-leave-to {
-      opacity: 0;
+  footer {
+    margin-top: auto;
   }
 </style>

@@ -17,8 +17,10 @@ $entity = new User($db);
 //$mail = 'admin2@admin.fr';
 //$password = 'admin2';
 
-$mail     = isset($_POST['mail']) ? $_POST['mail'] : die();
-$password = isset($_POST['password']) ? $_POST['password'] : die();
+$data = json_decode(file_get_contents("php://input"));
+
+$mail     = $data->email;
+$password = $data->password;
 $stmt     = $entity->create($mail, $password);
 
 if ($stmt == true) {

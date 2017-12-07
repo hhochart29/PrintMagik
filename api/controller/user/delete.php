@@ -15,9 +15,10 @@ $entity = new User($db);
 
 // Test before Front-end
 //$mail = 'admin2@admin.fr';
-//$password = 'admin2';
 
-$mail     = isset($_POST['mail']) ? $_POST['mail'] : die();
+$data = json_decode(file_get_contents("php://input"));
+
+$mail     = $data->email;
 $stmt     = $entity->delete($mail);
 
 if ($stmt == true) {

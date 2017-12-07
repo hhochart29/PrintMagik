@@ -1,22 +1,32 @@
 <template>
 
-  <footer class="page-footer pink darken-1">
+  <footer class="page-footer grey darken-4">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
-          <h5 class="white-text">PrintMagik</h5>
+          <h5 class="orange-text">PrintMagik</h5>
           <p class="grey-text text-lighten-4">
             PrintMagik vous propose un service réactif et de qualité pour toutes vos demandes d'impressions. Demander un devis, suivre une commanden ou encore accéder à vos factures, tout est désormais consultable en ligne.
           </p>
         </div>
         <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
+          <h5 class="orange-text">Settings</h5>
           <ul>
             <li>
-              <router-link to="account" class="orange-text">Mon Compte</router-link>
+              <router-link to="account" class="white-text">
+                <i class="material-icons">keyboard_arrow_right</i>
+                <span style="vertical-align: top;display: inline-block;">
+                Mon Compte
+                </span>
+              </router-link>
             </li>
             <li>
-              <router-link to="products" class="orange-text">Produits</router-link>
+              <router-link to="products" class="white-text">
+                <i class="material-icons">keyboard_arrow_right</i>
+                <span style="vertical-align: top;display: inline-block;">
+                  Produits
+                </span>
+              </router-link>
             </li>
           </ul>
         </div>

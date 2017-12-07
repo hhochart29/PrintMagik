@@ -12,11 +12,10 @@
     props: ['image'],
     mounted () {
       const tilt = this.$refs.tilt
-      console.log(tilt)
       VanillaTilt.init(tilt, {
-        max: 25,
+        max: 5,
         speed: 400,
-        scale: 1.05,
+        scale: 1,
         glare: true,
         transition: true
       })

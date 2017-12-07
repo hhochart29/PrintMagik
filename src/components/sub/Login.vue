@@ -2,10 +2,17 @@
   <div>
     <div class="row">
       <form class="col s12">
+
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
+                    leave-active-class="animated zoomOut">
+          <div class="card-panel orange-text grey darken-4" v-if="formReturn"><i class="material-icons">error</i>
+            {{ formReturn }}
+          </div>
+        </transition>
         <div class="row">
           <div class="input-field col s12 valign-wrapper">
             <transition name="iconTransition" appear mode="out-in">
-              <i key="2" class="material-icons prefix" style="color: orange;" v-if="errors.has('email')">error</i>
+              <i key="2" class="material-icons prefix" v-if="errors.has('email')">error</i>
               <i key="1" class="material-icons prefix" v-else>account_circle</i>
             </transition>
             <input id="email" name="email" type="email" v-validate="'required|email'" v-model="email"
@@ -22,7 +29,7 @@
         </div>
 
         <div class="row row-button">
-          <a class="waves-effect waves-light orange darken-1 btn" v-on:click="login">Se connecter</a>
+          <a class="waves-effect waves-light grey darken-4 orange-text btn" v-on:click="login">Se connecter</a>
         </div>
       </form>
     </div>
@@ -38,6 +45,7 @@
       return {
         user: [],
         email: '',
+        formReturn: '',
         password: ''
       }
     },
@@ -48,10 +56,17 @@
           password: this.password
         }
         axios.post('api/controller/user/read.php', params).then(response => {
-          console.log(response)
-          this.user = response.data.results
+          this.user = response.data.results[0]
+          if (this.user.email.length !== 0) {
+            localStorage.setItem('email', this.user.email)
+            localStorage.setItem('admin', this.user.isAdmin)
+            this.eventHub.$emit('emit', localStorage)
+            this.$forceUpdate()
+          } else {
+            this.formReturn = 'Mauvaise combinaison email / mot de passe'
+          }
         }).catch(e => {
-          this.errors.push(e)
+          this.formReturn = 'Mauvaise combinaison email / mot de passe'
           console.log(this.errors)
         })
       }
@@ -67,28 +82,37 @@
     }
   }
 
+  .card-panel {
+    font-weight: bold;
+    i {
+      vertical-align: middle;
+      display: inline-block;
+      padding-right: 10px;
+    }
+  }
+
   /* label color */
   .input-field {
     label {
-      color: orange;
+      color: #f57c00 !important;
     }
-    input[type=text]:focus + label {
-      color: orange;
+    input:focus + label {
+      color: #f57c00 !important;
     }
-    input[type=text]:focus {
-      border-bottom: 1px solid orange;
-      box-shadow: 0 1px 0 0 orange;
+    input:focus {
+      border-bottom: 1px solid #f57c00 !important;
+      box-shadow: 0 1px 0 0 #f57c00 !important;
     }
-    input[type=text].valid {
-      border-bottom: 1px solid orange;
-      box-shadow: 0 1px 0 0 orange;
+    input.valid {
+      border-bottom: 1px solid #f57c00 !important;
+      box-shadow: 0 1px 0 0 #f57c00 !important;
     }
-    input[type=text].invalid {
-      border-bottom: 1px solid orange;
-      box-shadow: 0 1px 0 0 orange;
+    input.invalid {
+      border-bottom: 1px solid #f57c00 !important;
+      box-shadow: 0 1px 0 0 #f57c00 !important;
     }
     .prefix.active {
-      color: orange;
+      color: #f57c00 !important;
     }
   }
 

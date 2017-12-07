@@ -1,19 +1,14 @@
 <template>
   <div>
-    Single product page
-    {{$route.params.id}}
+    Formulaire d'ajout d'un nouvel article
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Product',
+    name: 'FormAdd',
     data () {
       return {}
     }
   }
 </script>
-
-<style scoped>
-
-</style>
