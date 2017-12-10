@@ -13,7 +13,7 @@
           </p>
         </div>
       </li>
-      <li v-for="product in products" @click="deploy($el)">
+      <li v-for="product in products">
         <div class="collapsible-header">
           <i class="material-icons orange-text">check_circle</i>
           <span style="margin-right:15px"><b>ID : </b>{{ product.id }}</span>
@@ -29,7 +29,9 @@
           </div>
           <div class="col m6 s12">
             <p>{{ product.description}}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae officia placeat quam quia sit, velit! Architecto dolorem molestiae nam quia voluptatem? Delectus, eligendi.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
+              officia placeat quam quia sit, velit! Architecto dolorem molestiae nam quia voluptatem? Delectus,
+              eligendi.
             </p>
             <div class="price waves-effect waves-light grey darken-4 orange-text btn col s12 m3">
               {{product.price}}€
@@ -51,6 +53,7 @@
 <script>
   import axios from 'axios'
   import FormAdd from './FormAdd.vue'
+  import $ from 'jquery'
 
   export default {
     name: 'MyAccount',
@@ -64,9 +67,6 @@
     methods: {
       deleteProduct (id) {
         console.log('le produit avec l\'id ' + id + ' va être supprimé')
-      },
-      deploy (e) {
-        console.log(this.$el.querySelector(e))
       }
     },
     created () {
@@ -78,6 +78,9 @@
         this.errors.push(e)
         console.log(this.errors)
       })
+    },
+    mounted () {
+      $('.collapsible').collapsible()
     }
   }
 </script>
