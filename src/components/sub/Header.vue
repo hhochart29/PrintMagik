@@ -5,57 +5,77 @@
         <router-link :to="{name: 'home'}" id="logo-container" class="brand-logo"><img src="../../assets/logo.png"
                                                                                       alt=""></router-link>
         <ul class="right hide-on-med-and-down">
+
           <li>
-            <router-link :to="{name: 'products'}" class="orange-text">Produits</router-link>
-          </li>
-          <li v-if="user.email">
-            <router-link :to="{name: 'account'}" class="orange-text">Mon Compte</router-link>
+            <router-link :to="{name: 'products'}" class="orange-text">
+              <i class="material-icons grey darken-4">grid_on</i>
+              <span class="hover grey darken-4 white-text">
+                Produits
+              </span>
+            </router-link>
           </li>
 
-          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-            <li v-if="user.email" key="a"><a v-on:click="logout" class="orange-text">Déconnexion</a></li>
-            <li v-else key="b"><router-link :to="{name: 'account'}" class="orange-text">Connexion</router-link></li>
+          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
+                      leave-active-class="animated zoomOut">
+            <li v-if="user.email">
+              <router-link :to="{name: 'cart'}" class="orange-text">
+                <i class="material-icons grey darken-4">shopping_cart</i>
+                <span class="hover grey darken-4 white-text">
+                  Mon Panier
+                </span>
+                <span class="item-number" ref="basketCount">
+                  {{ basketCount }}
+                </span>
+              </router-link>
+            </li>
+          </transition>
+
+          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
+                      leave-active-class="animated zoomOut">
+            <li v-if="user.email">
+              <router-link :to="{name: 'account'}" class="orange-text">
+                <i class="material-icons grey darken-4">account_circle</i>
+                <span class="hover grey darken-4 white-text">
+                  Mon Compte
+                </span>
+              </router-link>
+            </li>
+          </transition>
+
+          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
+                      leave-active-class="animated zoomOut">
+            <li v-if="user.email" key="a">
+              <a v-on:click="logout" class="orange-text"><i class="material-icons grey darken-4">remove_circle</i></a>
+              <span class="hover grey darken-4 white-text">
+                Se déconnecter
+              </span>
+            </li>
+            <li v-else key="b">
+              <router-link :to="{name: 'account'}" class="orange-text">
+                <i class="material-icons grey darken-4">account_circle</i>
+                <span class="hover grey darken-4 white-text">
+                  Se connecter
+                </span>
+              </router-link>
+            </li>
           </transition>
         </ul>
-
-        <ul id="nav-mobile" class="side-nav">
-          <li>
-            <router-link :to="{name: 'products'}">Produits</router-link>
-          </li>
-          <li>
-            <router-link :to="{name: 'account'}">Mon Compte</router-link>
-          </li>
-        </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse" v-on:click="showMenu"><i class="material-icons">menu</i></a>
       </div>
-      <li class="username">
-        {{ user.email }}
-      </li>
     </nav>
-    <div class="section no-pad-bot" id="index-banner">
-      <h1 class="header center orange-text">PrintMagik</h1>
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">Impression, print & Flyers sur mesure</h5>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
-  //  import $ from 'jquery'
   export default {
     name: 'CustomHeader',
     data () {
       return {
-        user: localStorage
+        user: localStorage,
+        tooltip: false,
+        basketCount: localStorage.itemsCount
       }
     },
     methods: {
-      showMenu () {
-        console.log('Burger menu clicked')
-      },
       logout () {
         if (this.user.email !== 0) {
           console.log('User ' + this.user.email + ' has been disconnected')
@@ -68,21 +88,93 @@
     created: function () {
       this.eventHub.$on('emit', localStorageVar => {
         this.user = localStorageVar
+        this.basketCount = localStorageVar.itemsCount
+        this.$forceUpdate()
       })
     }
-
   }
 </script>
 
 <style scoped lang="scss">
-  .router-link-exact-active:not(#logo-container) {
-    background-color: lighten(black, 20%);
+  nav {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 100px;
+    z-index: 999;
+    box-shadow: 3px 0px 7px 0px rgba(0, 0, 0, 0.43);
+    .container {
+      margin: 0;
+      width: 100%;
+    }
+    #logo-container {
+      height: auto;
+      position: relative;
+      width: 100%;
+      padding: 15%;
+      z-index: 2;
+      img {
+        height: auto;
+        width: 100%;
+      }
+    }
+    ul {
+      text-align: center;
+      float: none !important;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      width: 100px;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 1;
+      li {
+        position: relative;
+        width: 100%;
+        &:hover .hover {
+          left: 100px;
+          -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
+          -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
+          box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45);
+        }
+        & > a {
+          padding: 0;
+        }
+        span {
+          position: relative;
+          padding: 0 15px;
+          &.item-number {
+            position: absolute;
+            right: 5px;
+            font-weight: bold;
+            top: 5px;
+          }
+          &.hover {
+            -webkit-transition: 0.5s all ease-in-out;
+            -moz-transition: 0.5s all ease-in-out;
+            -ms-transition: 0.5s all ease-in-out;
+            -o-transition: 0.5s all ease-in-out;
+            transition: 0.5s left ease-in-out;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            text-align: center;
+            padding: 5px 10px;
+            width: 100px;
+            z-index: -1;
+            line-height: 1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
   }
 
-  .username {
-    position: absolute;
-    top: 0;
-    right: 3%;
-    list-style-type: none;
+  .router-link-exact-active:not(#logo-container) {
+    background-color: lighten(black, 20%);
   }
 </style>

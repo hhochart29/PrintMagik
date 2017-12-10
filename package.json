@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "gsap": "^1.20.3",
     "jquery": "latest",
     "materialize-css": "^0.100.2",
     "vanilla-tilt": "^1.4.1",

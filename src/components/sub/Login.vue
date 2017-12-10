@@ -60,6 +60,9 @@
           if (this.user.email.length !== 0) {
             localStorage.setItem('email', this.user.email)
             localStorage.setItem('admin', this.user.isAdmin)
+            localStorage.setItem('itemsCount', 0)
+            let basket = []
+            localStorage.setItem('basket', JSON.stringify(basket))
             this.eventHub.$emit('emit', localStorage)
             this.$forceUpdate()
           } else {

@@ -3,12 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
-// Materialize CSS
 import 'materialize-css' // It installs the JS asset only
 import 'materialize-css/dist/css/materialize.css'
-
-// Vee form validate handler
 import veeValidate from 'vee-validate'
 
 Vue.config.productionTip = false
@@ -23,9 +19,10 @@ Vue.mixin({
   }
 })
 
-/* eslint-disable no-new */
+// Form validation
 Vue.use(veeValidate)
-new Vue({
+
+new Vue({ // eslint-disable-line no-new
   el: '#app',
   router,
   template: '<App/>',

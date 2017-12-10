@@ -1,9 +1,10 @@
 <template>
   <div class="product-list">
-    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
+                leave-active-class="animated zoomOut">
       <Loader v-if="loading"></Loader>
       <div v-else class="products row">
-        <div class="flipper-container col s12 m6" v-for="product in products">
+        <div class="flipper-container col s12 m6 l4" v-for="product in products.slice(0, limit)">
           <div class="flipper">
             <div class="card front" v-bind:class="{flipped: product.isflipped}">
               <div class="card-content">
@@ -37,7 +38,9 @@
                   <div class="price waves-effect waves-light grey darken-4 orange-text btn col s12 m3">
                     {{product.price}}€
                   </div>
-                  <div class="more waves-effect waves-light btn-flat col s12 m9">Ajouter au panier</div>
+                  <div class="more waves-effect waves-light btn-flat col s12 m9" @click="addToBasket(product)">
+                    Ajouter au panier
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,6 +65,12 @@
         loading: false
       }
     },
+    props: {
+      limit: {
+        default: 9999,
+        type: Number
+      }
+    },
     created () {
       this.loading = true
       setTimeout(() => {
@@ -75,11 +84,20 @@
           this.errors.push(e)
           console.log(this.errors)
         })
-      }, 2000)
+      }, 500)
     },
     methods: {
-      flipCard: function (product) {
+      flipCard (product) {
         product.isflipped = !product.isflipped
+      },
+      addToBasket (product) {
+        let basket = JSON.parse(localStorage.getItem('basket'))
+        basket.push(product)
+        localStorage.setItem('basket', JSON.stringify(basket))
+        let itemsCount = localStorage.getItem('itemsCount')
+        itemsCount++
+        localStorage.setItem('itemsCount', itemsCount)
+        this.eventHub.$emit('emit', localStorage)
       }
     }
   }

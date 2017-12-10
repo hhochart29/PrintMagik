@@ -1,22 +1,9 @@
 <template>
-
   <div>
     <ul class="collapsible" data-collapsible="accordion">
-      <li>
-        <div class="collapsible-header grey lighten-5">
-          <i class="material-icons green-text">add_circle</i>
-          Ajouter un nouvel article
-        </div>
-        <div class="collapsible-body">
-          <p>
-            <FormAdd></FormAdd>
-          </p>
-        </div>
-      </li>
-      <li v-for="product in products" @click="deploy($el)">
+      <li v-for="product in products">
         <div class="collapsible-header">
           <i class="material-icons orange-text">check_circle</i>
-          <span style="margin-right:15px"><b>ID : </b>{{ product.id }}</span>
           <span>
             {{ product.name}}
           </span>
@@ -45,57 +32,19 @@
       </li>
     </ul>
   </div>
-
 </template>
 
 <script>
-  import axios from 'axios'
-  import FormAdd from './FormAdd.vue'
-
   export default {
-    name: 'MyAccount',
-    components: {FormAdd},
+    name: 'Cart',
     data () {
       return {
-        products: [],
-        loading: false
+        products: JSON.parse(localStorage.basket)
       }
-    },
-    methods: {
-      deleteProduct (id) {
-        console.log('le produit avec l\'id ' + id + ' va être supprimé')
-      },
-      deploy (e) {
-        console.log(this.$el.querySelector(e))
-      }
-    },
-    created () {
-      this.loading = true
-      axios.get('/api/controller/product/readAll.php').then(response => {
-        this.products = response.data.results
-        this.loading = false
-      }).catch(e => {
-        this.errors.push(e)
-        console.log(this.errors)
-      })
     }
   }
 </script>
 
-<style lang="scss" scoped>
-
-  .row {
-    margin-bottom: 0;
-  }
-
-  ul.collapsible {
-    overflow: hidden;
-    li {
-      position: relative;
-    }
-    .waves-effect {
-      margin: 0 10px;
-    }
-  }
+<style scoped lang="scss">
 
 </style>

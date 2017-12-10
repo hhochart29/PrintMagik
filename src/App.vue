@@ -7,15 +7,14 @@
       <!--Header-->
 
       <div class="container">
-        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
-                    leave-active-class="animated zoomOut">
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
           <router-view/>
         </transition>
       </div>
 
     </div>
     <!--Footer-->
-    <CustomFooter></CustomFooter>
+    <!--<CustomFooter></CustomFooter>-->
     <!--Footer-->
   </div>
 </template>
@@ -40,6 +39,13 @@
       flex-direction: column;
       .app-container {
         flex-grow: 1;
+        &> .container {
+          margin-left: 100px;
+          padding: 20px 50px;
+          width: calc(100% - 100px);
+          max-width:none;
+
+        }
       }
     }
   }
