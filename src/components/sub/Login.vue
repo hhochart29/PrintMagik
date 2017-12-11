@@ -94,30 +94,8 @@
     }
   }
 
-  /* label color */
-  .input-field {
-    label {
-      color: #f57c00 !important;
-    }
-    input:focus + label {
-      color: #f57c00 !important;
-    }
-    input:focus {
-      border-bottom: 1px solid #f57c00 !important;
-      box-shadow: 0 1px 0 0 #f57c00 !important;
-    }
-    input.valid {
-      border-bottom: 1px solid #f57c00 !important;
-      box-shadow: 0 1px 0 0 #f57c00 !important;
-    }
-    input.invalid {
-      border-bottom: 1px solid #f57c00 !important;
-      box-shadow: 0 1px 0 0 #f57c00 !important;
-    }
-    .prefix.active {
-      color: #f57c00 !important;
-    }
-  }
+  /* Label colors */
+  @import "../../style/labelColors";
 
   .iconTransition-enter-active, iconTransition-leave-active {
     -webkit-transition: 1s all;
