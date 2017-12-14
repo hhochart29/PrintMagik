@@ -76,7 +76,6 @@
     }
   }
 </script>
-
 <style scoped lang="scss">
   .row-button {
     text-align: center;

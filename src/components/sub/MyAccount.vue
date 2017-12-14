@@ -1,7 +1,7 @@
 <template>
 
   <div>
-    <ul class="collapsible" data-collapsible="accordion">
+    <ul ref="collapsible" class="collapsible" data-collapsible="accordion">
       <li>
         <div class="collapsible-header grey lighten-5">
           <i class="material-icons green-text">add_circle</i>

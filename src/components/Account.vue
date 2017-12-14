@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <Banner></Banner>
-    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+    <Banner h1="Mon compte" :h2="h2"></Banner>
+    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
+                leave-active-class="animated zoomOut">
       <MyAccount v-if="email && admin"></MyAccount>
       <Login v-else></Login>
     </transition>
@@ -19,14 +20,30 @@
     data () {
       return {
         email: localStorage.email,
-        admin: localStorage.admin
+        admin: localStorage.admin,
+        h2: ''
       }
     },
     created () {
       this.eventHub.$on('emit', localStorageVar => {
         this.email = localStorageVar.email
         this.admin = localStorageVar.admin
+        this.checkStatus()
       })
+    },
+    methods: {
+      checkStatus () {
+        if (this.admin === '1') {
+          this.h2 = 'Ajout et suppressions de produits'
+        } else if (this.admin === '0') {
+          this.h2 = 'Mes commandes'
+        } else {
+          this.h2 = 'Connexion'
+        }
+      }
+    },
+    mounted () {
+      this.checkStatus()
     }
   }
 </script>

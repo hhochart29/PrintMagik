@@ -1,7 +1,6 @@
 <template>
   <div class="product-list">
-    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
-                leave-active-class="animated zoomOut">
+    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
       <Loader v-if="loading"></Loader>
       <div v-else class="products row">
         <div class="flipper-container col s12 m6 l4" v-for="product in products.slice(0, limit)">
@@ -91,6 +90,7 @@
         product.isflipped = !product.isflipped
       },
       addToBasket (product) {
+        product.uid = this.uniqueID()
         let basket = JSON.parse(localStorage.getItem('basket'))
         basket.push(product)
         localStorage.setItem('basket', JSON.stringify(basket))
@@ -98,6 +98,9 @@
         itemsCount++
         localStorage.setItem('itemsCount', itemsCount)
         this.eventHub.$emit('emit', localStorage)
+      },
+      uniqueID () { // Generate unique key
+        return '_' + Math.random().toString(36).substr(2, 9)
       }
     }
   }

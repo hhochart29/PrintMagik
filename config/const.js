@@ -1,4 +1,4 @@
-const orderStatus = {
+const orderStatuss  = {
   1: 'Reçue',
   2: 'Validée',
   3: 'Expédiée',

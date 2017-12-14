@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Banner></Banner>
+    <Banner h1="Tous nos produits" h2="Flyers, cartes de visite, depliants"></Banner>
     <div class="product-list">
       <ProductList></ProductList>
     </div>
@@ -20,7 +20,3 @@
     component: {ProductList}
   }
 </script>
-
-<style>
-
-</style>

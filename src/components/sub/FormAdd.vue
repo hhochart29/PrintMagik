@@ -55,7 +55,7 @@
     },
     methods: {
       submitProduct () {
-        console.log('a product is ready to be subbmited')
+        console.log('a product is ready to be submited')
       }
     }
   }
