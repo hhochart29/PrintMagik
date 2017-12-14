@@ -3,8 +3,7 @@
     <div class="row">
       <form class="col s12">
 
-        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn"
-                    leave-active-class="animated zoomOut">
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
           <div class="card-panel orange-text grey darken-4" v-if="formReturn"><i class="material-icons">error</i>
             {{ formReturn }}
           </div>
@@ -23,7 +22,7 @@
         <div class="row">
           <div class="input-field col s12 valign-wrapper">
             <i class="material-icons prefix">lock</i>
-            <input id="password" type="password" class="validate" v-model="password">
+            <input id="password" type="password" class="validate" v-model="password" @keyup.enter="login">
             <label for="password">Password</label>
           </div>
         </div>

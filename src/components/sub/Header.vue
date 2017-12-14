@@ -2,7 +2,8 @@
   <div>
     <nav class="grey darken-4" role="navigation">
       <div class="nav-wrapper container">
-        <router-link :to="{name: 'home'}" id="logo-container" class="brand-logo"><img src="../../assets/logo.png" alt=""></router-link>
+        <router-link :to="{name: 'home'}" id="logo-container" class="brand-logo"><img src="../../assets/logo.png"
+                                                                                      alt=""></router-link>
         <ul class="right hide-on-med-and-down">
 
           <li>

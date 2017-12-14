@@ -1,39 +1,54 @@
 <template>
   <div>
     <Banner h1="Mon panier" h2="Commander & liste des produits"></Banner>
-    <ul class="collection">
-      <transition-group appear mode="out-in" name="custom-classes-transition" enter-active-class="animated slideInLeft"
-                        leave-active-class="animated slideOutLeft">
-        <li v-for="product in products" class="collection-item avatar" :key="product.id" v-if="!product.isHidden">
-          <img :src="product.image" class="circle">
-          <span class="title">{{product.name}}</span>
-          <p>
-            {{ product.description}}
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
-            officia
-          </p>
-          <div class="chip price dark-text">
-            {{product.price}}€
+    <transition mode="out-in" name="custom-classes-transition" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+      <ul class="collection" v-if="products.length > 0">
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
+          <div>
+            <li v-for="product in products" class="collection-item avatar" :key="product.id" v-if="!product.isHidden">
+              <img :src="product.image" class="circle">
+              <span class="title">{{product.name}}</span>
+              <p>
+                {{ product.description}}
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
+                officia
+              </p>
+              <div class="chip price dark-text">
+                {{product.price}}€
+              </div>
+              <span class="secondary-content">
+                <i class="material-icons red white-text" @click="deleteProduct(product)">clear</i>
+              </span>
+            </li>
           </div>
-          <span class="secondary-content">
-            <i class="material-icons red white-text" @click="deleteProduct(product)">clear</i>
-          </span>
-        </li>
-      </transition-group>
-      <li class="collection-item avatar total">
-        <div class="card">
-          <div class="card-content orange-text">
-            <span class="card-title">Total du panier : <b>{{total}} €</b></span>
+        </transition>
+          <li class="collection-item avatar total">
+            <div class="card">
+              <div class="card-content orange-text">
+                <span class="card-title">Total du panier : <b>{{total}} €</b></span>
+              </div>
+              <div class="card-action">
+                <div class="more waves-effect grey darken-4 orange-text waves-light btn-flat col s12 m9" @click="order()">
+                  Valider le panier
+                  <i class="material-icons orange-text">shopping_cart</i>
+                </div>
+              </div>
+            </div>
+          </li>
+      </ul>
+    <div class="row" v-else>
+      <div class="col s12 m12">
+        <div class="card grey darken-4">
+          <div class="card-content white-text">
+            <span class="card-title">Votre panier est vide</span>
           </div>
           <div class="card-action">
-            <div class="more waves-effect grey darken-4 orange-text waves-light btn-flat col s12 m9" @click="order()">
-              Valider le panier
-              <i class="material-icons orange-text">shopping_cart</i>
-            </div>
+            <router-link :to="{name: 'products'}">Parcourir les produits</router-link>
           </div>
         </div>
-      </li>
-    </ul>
+      </div>
+    </div>
+    </transition>
   </div>
 </template>
 
@@ -54,8 +69,15 @@
       deleteProduct (product) {
         for (let i = 0; i < this.products.length; i++) {
           if (this.products[i].uid === product.uid) {
-            delete this.products[i]
-            console.log(this.products)
+            this.products.splice(i, 1)
+            // Localstorage update
+            localStorage.setItem('basket', JSON.stringify(this.products))
+            let itemsCount = localStorage.getItem('itemsCount')
+            itemsCount--
+            localStorage.setItem('itemsCount', itemsCount)
+            this.eventHub.$emit('emit', localStorage)
+            // End Localstorage update
+            this.$set(product, 'isHidden', true)
           }
         }
       },
@@ -112,27 +134,29 @@
       &.total {
         text-align: center;
         padding: 0 !important;
-        .card {
-          margin: 0;
-          .card-content {
-            padding: 10px;
-            .card-title {
-              font-weight: 300;
-              font-family: Roboto, serif;
-              margin-bottom: 0;
-            }
-          }
-          .more {
-            line-height: 2em;
-            i {
-              vertical-align: middle;
-              line-height: 2em;
-              margin-left: 5px;
-              top: -2px;
-              position: relative;
-            }
-          }
-        }
+      }
+    }
+  }
+
+  .card {
+    text-align: center;
+    margin: 0;
+    .card-content {
+      padding: 10px;
+      .card-title {
+        font-weight: 300;
+        font-family: Roboto, serif;
+        margin-bottom: 0;
+      }
+    }
+    .more {
+      line-height: 2em;
+      i {
+        vertical-align: middle;
+        line-height: 2em;
+        margin-left: 5px;
+        top: -2px;
+        position: relative;
       }
     }
   }
