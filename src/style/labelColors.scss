@@ -3,18 +3,18 @@
 	label {
 		color: #f57c00 !important;
 	}
-	input:focus + label {
+	input:focus + label, textarea:focus + label {
 		color: #f57c00 !important;
 	}
-	input:focus {
+	input:focus, textarea:focus {
 		border-bottom: 1px solid #f57c00 !important;
 		box-shadow: 0 1px 0 0 #f57c00 !important;
 	}
-	input.valid {
+	input.valid, textarea.valid {
 		border-bottom: 1px solid #f57c00 !important;
 		box-shadow: 0 1px 0 0 #f57c00 !important;
 	}
-	input.invalid {
+	input.invalid, textarea.invalid {
 		border-bottom: 1px solid #f57c00 !important;
 		box-shadow: 0 1px 0 0 #f57c00 !important;
 	}

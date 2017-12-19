@@ -7,7 +7,7 @@
       <!--Header-->
 
       <div class="container">
-        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
           <router-view/>
         </transition>
       </div>
@@ -33,6 +33,7 @@
   @import 'style/main';
 
   body {
+    overflow-x: hidden;
     #app {
       min-height: 100vh;
       display: flex;

@@ -4,32 +4,52 @@
     <form class="col s12">
 
       <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated slideInLeft">
-        <div class="card-panel orange-text grey darken-4" v-if="formReturn"><i class="material-icons">error</i>
-          {{ formReturn }}
-        </div>
+        <!--<div class="card-panel orange-text grey darken-4" v-if="formReturn"><i class="material-icons">error</i>-->
+          <!--{{ formReturn }}-->
+        <!--</div>-->
       </transition>
 
       <div class="row">
         <div class="input-field col s12 valign-wrapper">
-          <i key="1" class="material-icons prefix">account_circle</i>
-          <input id="productTitle" type="text" v-validate="'required'" v-model="productTitle">
-          <label for="productTitle">Email</label>
+          <transition name="iconTransition" appear mode="out-in">
+            <i key="2" class="material-icons prefix" v-if="errors.has('productTitle')">error</i>
+            <i key="1" class="material-icons prefix" v-else>check</i>
+          </transition>
+          <input id="productTitle" type="text" v-validate="'required|string'" v-model="productTitle" name="productTitle">
+          <label for="productTitle">Titre du produit</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12 valign-wrapper">
-          <i class="material-icons prefix">lock</i>
-          <input id="productContent" type="text" class="validate" v-model="productContent">
+          <transition name="iconTransition" appear mode="out-in">
+            <i key="2" class="material-icons prefix" v-if="errors.has('productContent')">error</i>
+            <i key="1" class="material-icons prefix" v-else>check</i>
+          </transition>
+          <textarea id="productContent" v-validate="'required|string'" class="validate materialize-textarea" v-model="productContent" name="productContent"></textarea>
           <label for="productContent">Description du produit</label>
         </div>
       </div>
 
       <div class="row">
         <div class="input-field col s12 valign-wrapper">
-          <i class="material-icons prefix">lock</i>
-          <input id="productImage" type="text" class="validate" v-model="productImage">
+          <transition name="iconTransition" appear mode="out-in">
+            <i key="2" class="material-icons prefix" v-if="errors.has('productImage')">error</i>
+            <i key="1" class="material-icons prefix" v-else>check</i>
+          </transition>
+          <input id="productImage" type="text" class="validate" v-validate="'required|url'" v-model="productImage" name="productImage">
           <label for="productImage">Lien de l'image</label>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12 valign-wrapper">
+          <transition name="iconTransition" appear mode="out-in">
+            <i key="2" class="material-icons prefix" v-if="errors.has('productPrice')">error</i>
+            <i key="1" class="material-icons prefix" v-else>check</i>
+          </transition>
+          <input id="productPrice" type="number" step="0.01" class="validate" v-validate="'required|decimal:2'" v-model="productPrice" name="productPrice">
+          <label for="productPrice">Prix</label>
         </div>
       </div>
 
