@@ -1,5 +1,4 @@
 <?php
-
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
@@ -27,6 +26,7 @@ if ($num > 0) {
         $uniqueResponse = [
             'id'    => $id,
             'name'  => $name,
+            'content'  => $content,
             'price' => $price,
             'image' => $image,
         ];
@@ -36,5 +36,5 @@ if ($num > 0) {
 
     echo json_encode($response);
 } else {
-    echo json_encode(['message' => 'Aucun utilisateur trouvé']);
+    echo json_encode(['message' => 'Aucun produit trouvé']);
 }

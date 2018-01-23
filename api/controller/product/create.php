@@ -18,15 +18,20 @@ $entity = new Product($db);
 //$price = 10.00;
 //$image = 'https://cdn.mycreativeshop.com/images/templates/11085/five-star-luxury-hotels-flyer-template-thumb1.jpg';
 
-$name     = isset($_POST['name']) ? $_POST['name'] : die();
-$price     = isset($_POST['price']) ? $_POST['price'] : die();
-$image     = isset($_POST['image']) ? $_POST['image'] : die();
+$data = json_decode(file_get_contents("php://input"));
 
-$stmt = $entity->create($name, $price, $image);
+$name    = $data->name;
+$content = $data->content;
+$price   = $data->price;
+$image   = $data->image;
+
+$stmt = $entity->create($name, $content, $price, $image);
 
 if ($stmt == true) {
     echo '{';
     echo '"message": "Product was created."';
+    echo ',';
+    echo '"created": true';
     echo '}';
 } else {
     echo '{';

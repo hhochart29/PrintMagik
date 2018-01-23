@@ -38,7 +38,9 @@
                     {{product.price}}€
                   </div>
                   <div class="more waves-effect waves-light btn-flat col s12 m9" @click="addToBasket(product)">
-                    Ajouter au panier
+                    <span>
+                      Ajouter au panier
+                    </span>
                   </div>
                 </div>
               </div>
@@ -102,6 +104,10 @@
       uniqueID () { // Generate unique key
         return '_' + Math.random().toString(36).substr(2, 9)
       }
+    },
+    mounted () {
+      // console.log(this.$el.querySelectorAll('div.more'))
+      // TweenMax.to(document.querySelector('.back .more.waves-effect span'), 5, {rotation: 360, repeat: -1})
     }
   }
 </script>
@@ -147,6 +153,9 @@
       -o-transition: all 1.5s;
       transition: all 1.5s;
       backface-visibility: hidden;
+      .card-title {
+        font-family: Roboto, serif;
+      }
       &.front {
         -webkit-transform: rotateY(0deg);
         -moz-transform: rotateY(0deg);
@@ -171,6 +180,21 @@
         -ms-transform: rotateY(0deg);
         -o-transform: rotateY(0deg);
         transform: rotateY(0deg);
+        .card-title {
+          padding-right: 60px;
+        }
+        .more.waves-effect {
+          padding-right: 0;
+          span {
+            padding: 0 8px;
+            display: inline-block;
+            height: 100%;
+            border: 2px solid #212121;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+          }
+        }
         &.flipped {
           -webkit-transform: rotateY(180deg);
           -moz-transform: rotateY(180deg);
@@ -189,9 +213,6 @@
           cursor: pointer;
         }
       }
-    }
-    .card-title {
-      padding-right: 60px;
     }
   }
 </style>

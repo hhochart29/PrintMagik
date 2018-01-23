@@ -21,10 +21,11 @@ $entity = new Product($db);
 
 $id     = isset($_POST['id']) ? $_POST['id'] : die();
 $name     = isset($_POST['name']) ? $_POST['name'] : die();
+$name     = isset($_POST['content']) ? $_POST['content'] : die();
 $price     = isset($_POST['price']) ? $_POST['price'] : die();
 $image     = isset($_POST['image']) ? $_POST['image'] : die();
 
-$stmt = $entity->update($id, $name, $price, $image);
+$stmt = $entity->update($id, $name, $content, $price, $image);
 
 if ($stmt == true) {
     echo '{';

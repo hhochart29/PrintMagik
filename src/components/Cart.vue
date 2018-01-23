@@ -1,53 +1,52 @@
 <template>
   <div>
     <Banner h1="Mon panier" h2="Commander & liste des produits"></Banner>
-    <transition mode="out-in" name="custom-classes-transition" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
+    <transition mode="out-in" name="custom-classes-transition" enter-active-class="animated flipInX"
+                leave-active-class="animated flipOutX">
       <ul class="collection" v-if="products.length > 0">
-        <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated slideInLeft" leave-active-class="animated slideOutLeft">
-          <div>
-            <li v-for="product in products" class="collection-item avatar" :key="product.id" v-if="!product.isHidden">
-              <img :src="product.image" class="circle">
-              <span class="title">{{product.name}}</span>
-              <p>
-                {{ product.description}}
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
-                officia
-              </p>
-              <div class="chip price dark-text">
-                {{product.price}}€
-              </div>
-              <span class="secondary-content">
+        <transition-group appear mode="out-in" name="slide">
+          <li v-for="product in products" class="collection-item avatar" :key="product.id" v-if="!product.isHidden">
+            <img :src="product.image" class="circle">
+            <span class="title">{{product.name}}</span>
+            <p>
+              {{ product.description}}
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
+              officia
+            </p>
+            <div class="chip price dark-text">
+              {{product.price}}€
+            </div>
+            <span class="secondary-content">
                 <i class="material-icons red white-text" @click="deleteProduct(product)">clear</i>
               </span>
-            </li>
-          </div>
-        </transition>
-          <li class="collection-item avatar total">
-            <div class="card">
-              <div class="card-content orange-text">
-                <span class="card-title">Total du panier : <b>{{total}} €</b></span>
-              </div>
-              <div class="card-action">
-                <div class="more waves-effect grey darken-4 orange-text waves-light btn-flat col s12 m9" @click="order()">
-                  Valider le panier
-                  <i class="material-icons orange-text">shopping_cart</i>
-                </div>
+          </li>
+        </transition-group>
+        <li class="collection-item avatar total">
+          <div class="card">
+            <div class="card-content orange-text">
+              <span class="card-title">Total du panier : <b>{{total}} €</b></span>
+            </div>
+            <div class="card-action">
+              <div class="more waves-effect grey darken-4 orange-text waves-light btn-flat col s12 m9" @click="order()">
+                Valider le panier
+                <i class="material-icons orange-text">shopping_cart</i>
               </div>
             </div>
-          </li>
-      </ul>
-    <div class="row" v-else>
-      <div class="col s12 m12">
-        <div class="card grey darken-4">
-          <div class="card-content white-text">
-            <span class="card-title">Votre panier est vide</span>
           </div>
-          <div class="card-action">
-            <router-link :to="{name: 'products'}">Parcourir les produits</router-link>
+        </li>
+      </ul>
+      <div class="row" v-else>
+        <div class="col s12 m12">
+          <div class="card grey darken-4">
+            <div class="card-content white-text">
+              <span class="card-title">Votre panier est vide</span>
+            </div>
+            <div class="card-action">
+              <router-link :to="{name: 'products'}">Parcourir les produits</router-link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </transition>
   </div>
 </template>
@@ -78,10 +77,12 @@
             this.eventHub.$emit('emit', localStorage)
             // End Localstorage update
             this.$set(product, 'isHidden', true)
+            this.getTotalPrice()
           }
         }
       },
       getTotalPrice () {
+        this.total = 0
         this.products.forEach(e => {
           this.total += parseFloat(e.price)
         })
@@ -159,6 +160,14 @@
         position: relative;
       }
     }
+  }
+
+  .slide-leave-to {
+    transform: translateX(100%);
+  }
+
+  .slide-leave-active {
+    transition: transform 1s;
   }
 
 </style>

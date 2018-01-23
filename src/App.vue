@@ -6,6 +6,7 @@
       <CustomHeader></CustomHeader>
       <!--Header-->
 
+      <Notifications></Notifications>
       <div class="container">
         <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated fadeInLeft" leave-active-class="animated fadeOutRight">
           <router-view/>
@@ -22,10 +23,11 @@
 <script>
   import CustomHeader from './components/sub/Header'
   import CustomFooter from './components/sub/Footer'
+  import Notifications from './components/Notifications'
 
   export default {
     name: 'app',
-    components: {CustomHeader, CustomFooter}
+    components: {CustomHeader, CustomFooter, Notifications}
   }
 </script>
 

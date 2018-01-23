@@ -31,14 +31,15 @@ class Product
         return $stmt;
     }
 
-    public function create($name, $price, $image)
+    public function create($name, $content, $price, $image)
     {
-        $query = "INSERT INTO product(name, price, image)
-                VALUES (:name, :price, :image)";
+        $query = "INSERT INTO product(name, content, price, image)
+                VALUES (:name, :content, :price, :image)";
         $stmt  = $this->conn->prepare($query);
         $res   = $stmt->execute(
             array(
                 'name'     => $name,
+                'content' => $content,
                 'price' => $price,
                 'image' => $image,
             )
@@ -66,14 +67,15 @@ class Product
         }
     }
 
-    public function update($id, $name, $price, $image)
+    public function update($id, $name, $content, $price, $image)
     {
-        $query = "UPDATE product SET name = :name, price = :price, image = :image WHERE id = :id";
+        $query = "UPDATE product SET name = :name, content = :content, price = :price, image = :image WHERE id = :id";
         $stmt  = $this->conn->prepare($query);
         $res   = $stmt->execute(
             array(
                 'id' => $id,
                 'name' => $name,
+                'content' => $content,
                 'price' => $price,
                 'image' => $image
             )

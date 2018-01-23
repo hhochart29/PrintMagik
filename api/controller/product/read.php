@@ -15,8 +15,9 @@ $entity = new Product($db);
 
 // Test before front
 //$id = 1;
+$data = json_decode(file_get_contents("php://input"));
 
-$id = isset($_POST['id']) ? $_POST['id'] : die();
+$id = $data->id;
 
 $stmt = $entity->read($id);
 $num  = $stmt->rowCount();
@@ -32,6 +33,7 @@ if ($num > 0) {
         $uniqueResponse = [
             'id' => $id,
             'name' => $name,
+            'content' => $content,
             'price' => $price,
             'image' => $image
         ];

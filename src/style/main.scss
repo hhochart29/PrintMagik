@@ -12,9 +12,10 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @font-face {
 	font-family: 'Typewcond';
-	src: url(/assets/typewcond_regular.otf);
+	src: url(./assets/typewcond_regular.otf);
 }
 
 h1, h2, h3, h4, .card-title {
+	letter-spacing: -2px;
 	font-family: Typewcond, serif;
 }
