@@ -1,6 +1,5 @@
 <template>
 
-
   <div class="flipper">
     <div class="card front" ref="front" v-bind:class="{flipped: product.isflipped}">
       <div class="card-content">
