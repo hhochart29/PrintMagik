@@ -33,6 +33,7 @@
     position: fixed;
     top: 2%;
     left: 10%;
+    z-index: 9999;
     padding: 25px 50px;
   }
 

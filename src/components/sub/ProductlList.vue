@@ -100,6 +100,7 @@
         itemsCount++
         localStorage.setItem('itemsCount', itemsCount)
         this.eventHub.$emit('emit', localStorage)
+        this.eventHub.$emit('sendNotif', 'Votre produit a bien été ajouté au panier')
       },
       uniqueID () { // Generate unique key
         return '_' + Math.random().toString(36).substr(2, 9)
