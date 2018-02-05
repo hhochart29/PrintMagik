@@ -16,7 +16,9 @@ $entity = new Product($db);
 // Test before Front-end
 //$id = '5';
 
-$id     = isset($_POST['id']) ? $_POST['id'] : die();
+$data = json_decode(file_get_contents("php://input"));
+
+$id = $data->id;
 
 $stmt     = $entity->delete($id);
 

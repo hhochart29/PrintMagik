@@ -75,6 +75,7 @@
         itemsCount++
         localStorage.setItem('itemsCount', itemsCount)
         this.eventHub.$emit('emit', localStorage)
+        this.eventHub.$emit('productAdded')
         this.eventHub.$emit('sendNotif', 'Votre produit a bien été ajouté au panier')
       },
       uniqueID () { // Generate unique key
@@ -155,6 +156,7 @@
         -ms-transform: rotateY(0deg);
         -o-transform: rotateY(0deg);
         transform: rotateY(0deg);
+        background-color: #f5f5f5;
         .card-title {
           padding-right: 60px;
         }

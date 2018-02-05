@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Banner h1="Mon compte" :h2="h2"></Banner>
-    <transition appear mode="out-in" nam\e="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+    <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
       <MyAccount v-if="email && admin"></MyAccount>
       <Login v-else></Login>
     </transition>

@@ -15,11 +15,10 @@
             </router-link>
           </li>
 
-          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
-                      leave-active-class="animated zoomOut">
+          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
             <li v-if="user.email">
-              <router-link :to="{name: 'cart'}" class="orange-text">
-                <i class="material-icons grey darken-4">shopping_cart</i>
+              <router-link :to="{name: 'cart'}" class="orange-text grey darken-4">
+                <i class="material-icons" ref="basket">shopping_cart</i>
                 <span class="hover grey darken-4 white-text">
                   Mon Panier
                 </span>
@@ -90,6 +89,12 @@
         this.user = localStorageVar
         this.basketCount = localStorageVar.itemsCount
         this.$forceUpdate()
+      })
+      this.eventHub.$on('productAdded', () => {
+        this.$refs.basket.classList.add('tada')
+        setTimeout(() => {
+          this.$refs.basket.classList.remove('tada')
+        }, 1000)
       })
     }
   }
@@ -176,5 +181,37 @@
 
   .router-link-exact-active:not(#logo-container) {
     background-color: lighten(black, 20%);
+  }
+
+  @keyframes tada {
+    from {
+      transform: scale3d(1, 1, 1);
+    }
+
+    10%,
+    20% {
+      transform: scale3d(0.5, 0.5, 0.5) rotate3d(0, 0, 1, -10deg);
+    }
+
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: scale3d(2.5, 2.5, 2.5) rotate3d(0, 0, 1, 10deg);
+    }
+
+    40%,
+    60%,
+    80% {
+      transform: scale3d(2.5, 2.5, 2.5) rotate3d(0, 0, 1, -10deg);
+    }
+
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  .tada {
+    animation: tada 1s normal;
   }
 </style>
