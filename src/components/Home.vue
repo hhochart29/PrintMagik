@@ -7,12 +7,28 @@
         Présentation
       </div>
       <div class="card-content">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae debitis deserunt dolorum eaque eligendi, eveniet fuga, fugit in incidunt, iure laboriosam libero omnis praesentium quaerat ratione repellendus repudiandae saepe!
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi beatae debitis deserunt dolorum eaque eligendi, eveniet fuga, fugit in incidunt, iure laboriosam libero omnis praesentium quaerat ratione repellendus repudiandae saepe!
+        Découvrez nos produits à prix et délais ultra compétitifs.
+        Fervents défenseurs du made in France, profitez de produits
+        de qualité au meilleur prix et d'un service client
+        à votre écoute (et dans la bonne humeur).
+        <div class="row">
+          <div class="col s4" style="text-align: center;">
+            <i class="material-icons medium">grade</i><br />
+            Des produits de qualité
+          </div>
+          <div class="col s4" style="text-align: center;">
+            <i class="material-icons medium">verified_user</i><br />
+            Des transactions sécurisées
+          </div>
+          <div class="col s4" style="text-align: center;">
+            <i class="material-icons medium">layers</i><br />
+            Des produits personnalisables
+          </div>
+        </div>
       </div>
     </div>
-  <h3>Nos meilleurs ventes</h3>
-  <ProductList :limit=3></ProductList>
+    <h3>Nos meilleurs ventes</h3>
+    <ProductList :limit=3></ProductList>
   </div>
 </template>
 
@@ -32,5 +48,20 @@
 <style scoped lang="scss">
   h3 {
     text-align: center;
+  }
+
+  .card-title {
+    font-size: 35px;
+  }
+
+  .card-content {
+    font-size: 17px;
+    text-align: center;
+    .row {
+      margin-top: 25px;
+      font-family: Typewcond, serif;
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
 </style>

@@ -22,7 +22,7 @@ $data = json_decode(file_get_contents("php://input"));
 
 $name    = $data->name;
 $content = $data->content;
-$price   = $data->price;
+$price   = floatval($data->price);
 $image   = $data->image;
 
 $stmt = $entity->create($name, $content, $price, $image);

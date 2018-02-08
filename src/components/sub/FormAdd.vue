@@ -66,6 +66,7 @@
 
 <script>
   import axios from 'axios'
+  import $ from 'jquery'
 
   export default {
     name: 'FormAdd',
@@ -92,6 +93,7 @@
             console.log(response.data)
             if (response.data.created === true) {
               this.eventHub.$emit('sendNotif', 'Votre produit a bien été ajouté')
+              $('.collapsible').collapsible('open', 0)
             }
           }).catch(e => {
             this.formReturn = 'Les champs ne sont pas remplis correctement'

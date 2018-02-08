@@ -5,18 +5,16 @@
         <router-link :to="{name: 'home'}" id="logo-container" class="brand-logo"><img src="../../assets/logo.png"
                                                                                       alt=""></router-link>
         <ul class="right hide-on-med-and-down">
-
-          <li>
-            <router-link :to="{name: 'products'}" class="orange-text">
-              <i class="material-icons grey darken-4">grid_on</i>
-              <span class="hover grey darken-4 white-text">
+          <transition-group mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
+            <li key="1">
+              <router-link :to="{name: 'products'}" class="orange-text">
+                <i class="material-icons grey darken-4">grid_on</i>
+                <span class="hover grey darken-4 white-text">
                 Produits
               </span>
-            </router-link>
-          </li>
-
-          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-            <li v-if="user.email">
+              </router-link>
+            </li>
+            <li key="2" v-if="user.email">
               <router-link :to="{name: 'cart'}" class="orange-text grey darken-4">
                 <i class="material-icons" ref="basket">shopping_cart</i>
                 <span class="hover grey darken-4 white-text">
@@ -27,11 +25,7 @@
                 </span>
               </router-link>
             </li>
-          </transition>
-
-          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
-                      leave-active-class="animated zoomOut">
-            <li v-if="user.email">
+            <li key="3" v-if="user.email">
               <router-link :to="{name: 'account'}" class="orange-text">
                 <i class="material-icons grey darken-4">account_circle</i>
                 <span class="hover grey darken-4 white-text">
@@ -39,17 +33,21 @@
                 </span>
               </router-link>
             </li>
-          </transition>
-
-          <transition mode="out-in" appear name="custom-classes-transition" enter-active-class="animated zoomIn"
-                      leave-active-class="animated zoomOut">
-            <li v-if="user.email" key="a">
+            <li key="4">
+              <router-link :to="{name: 'contact'}" class="orange-text">
+                <i class="material-icons grey darken-4">question_answer</i>
+                <span class="hover grey darken-4 white-text">
+                Contact
+              </span>
+              </router-link>
+            </li>
+            <li key="5" v-if="user.email">
               <a v-on:click="logout" class="orange-text"><i class="material-icons grey darken-4">remove_circle</i></a>
               <span class="hover grey darken-4 white-text">
                 Se déconnecter
               </span>
             </li>
-            <li v-else key="b">
+            <li key="6" v-else>
               <router-link :to="{name: 'account'}" class="orange-text">
                 <i class="material-icons grey darken-4">account_circle</i>
                 <span class="hover grey darken-4 white-text">
@@ -57,7 +55,7 @@
                 </span>
               </router-link>
             </li>
-          </transition>
+          </transition-group>
         </ul>
       </div>
     </nav>

@@ -38,10 +38,10 @@ class Product
         $stmt  = $this->conn->prepare($query);
         $res   = $stmt->execute(
             array(
-                'name'     => $name,
+                'name'    => $name,
                 'content' => $content,
-                'price' => $price,
-                'image' => $image,
+                'price'   => $price,
+                'image'   => $image,
             )
         );
         if ($res) {
@@ -73,11 +73,11 @@ class Product
         $stmt  = $this->conn->prepare($query);
         $res   = $stmt->execute(
             array(
-                'id' => $id,
-                'name' => $name,
+                'id'      => $id,
+                'name'    => $name,
                 'content' => $content,
-                'price' => $price,
-                'image' => $image
+                'price'   => $price,
+                'image'   => $image,
             )
         );
         if ($res) {

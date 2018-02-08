@@ -2,7 +2,8 @@
   <div class="container">
     <Banner h1="Mon compte" :h2="h2"></Banner>
     <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
-      <MyAccount v-if="email && admin"></MyAccount>
+      <MyAccount v-if="email && admin === '1'"></MyAccount>
+      <Order v-else-if="admin === '0'"></Order>
       <Login v-else></Login>
     </transition>
   </div>
@@ -12,9 +13,10 @@
   import Login from './sub/Login.vue'
   import MyAccount from './sub/MyAccount.vue'
   import Banner from './sub/Banner.vue'
+  import Order from './sub/Order.vue'
 
   export default {
-    components: {Login, MyAccount, Banner},
+    components: {Login, MyAccount, Banner, Order},
     name: 'Account',
     data () {
       return {

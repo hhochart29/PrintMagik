@@ -24,10 +24,18 @@
       <div class="card-content">
         <span class="card-title">{{product.name}}</span>
         <div class="content">
-          <blockquote>
-            {{ product.content }}
-            Ceci est le contenu de l'article permetteant une description brieve
+          <blockquote v-html="product.content">
           </blockquote>
+
+          <div class="choix-format">
+            <div>
+              Choississez le format :
+            </div>
+            <div class="choix">A1</div>
+            <div class="choix">A2</div>
+            <div class="choix">A3</div>
+            <div class="choix">A4</div>
+          </div>
           <div class="card-action row">
             <div class="price waves-effect waves-light grey darken-4 orange-text btn col s12 m3">
               {{product.price}}€
@@ -129,7 +137,8 @@
       transition: all 1.5s;
       backface-visibility: hidden;
       .card-title {
-        font-family: Roboto, serif;
+        font-family: Typewcond, serif;
+        font-weight: bold;
       }
       &.front {
         -webkit-transform: rotateY(0deg);
@@ -151,6 +160,7 @@
         left: 0;
         top: 0;
         margin: 0;
+        width: 100%;
         -webkit-transform: rotateY(0deg);
         -moz-transform: rotateY(0deg);
         -ms-transform: rotateY(0deg);
@@ -169,6 +179,20 @@
             left: 24px;
             right: 24px;
             padding: 24px;
+          }
+          .choix-format {
+            .choix {
+              background-color: white;
+              cursor: pointer;
+              padding: 15px;
+              margin: 15px;
+              float: left;
+              width: calc(25% - 30px);
+              text-align: center;
+              text-transform: uppercase;
+              font-weight: bold;
+              box-shadow: 0 1px 5px -2px black;
+            }
           }
         }
         .more.waves-effect {
