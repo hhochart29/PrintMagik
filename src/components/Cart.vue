@@ -8,11 +8,7 @@
           <li v-for="product in products" class="collection-item avatar" :key="product.id" v-if="!product.isHidden">
             <img :src="product.image" class="circle">
             <span class="title">{{product.name}}</span>
-            <p>
-              {{ product.description}}
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aut eos et eum facere labore molestiae
-              officia
-            </p>
+            <p v-html="product.content"></p>
             <div class="chip price dark-text">
               {{product.price}}€
             </div>

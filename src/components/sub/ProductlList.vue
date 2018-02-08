@@ -1,5 +1,5 @@
 <template>
-  <div class="product-list">
+  <div class="product-list" style="position: relative;">
     <transition appear mode="out-in" name="custom-classes-transition" enter-active-class="animated zoomIn" leave-active-class="animated zoomOut">
       <Loader v-if="loading"></Loader>
       <div v-else class="products row">
@@ -45,7 +45,7 @@
           this.errors.push(e)
           console.log(this.errors)
         })
-      }, 500)
+      }, 1500)
     }
   }
 </script>

@@ -31,11 +31,24 @@
             <div>
               Choississez le format :
             </div>
-            <div class="choix">A1</div>
-            <div class="choix">A2</div>
-            <div class="choix">A3</div>
-            <div class="choix">A4</div>
+            <div v-for="option in options" class="choix" :class="{selected: option.selected}"
+                 @click="optionSelect(option)">
+              {{ option.name }}
+            </div>
           </div>
+
+          <div>
+            <div class="file-field input-field">
+              <div class="btn black orange-text">
+                <span>Votre image</span>
+                <input type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>
+          
           <div class="card-action row">
             <div class="price waves-effect waves-light grey darken-4 orange-text btn col s12 m3">
               {{product.price}}€
@@ -61,7 +74,25 @@
     name: 'Product',
     data () {
       return {
-        customHeight: 0
+        customHeight: 0,
+        options: [
+          {
+            name: 'A1',
+            selected: false
+          },
+          {
+            name: 'A2',
+            selected: false
+          },
+          {
+            name: 'A3',
+            selected: false
+          },
+          {
+            name: 'A4',
+            selected: false
+          }
+        ]
       }
     },
     props: {
@@ -88,6 +119,13 @@
       },
       uniqueID () { // Generate unique key
         return '_' + Math.random().toString(36).substr(2, 9)
+      },
+      optionSelect (option) {
+        let beforeUnselect = option.selected
+        this.options.forEach(option => {
+          option.selected = false
+        })
+        option.selected = !beforeUnselect
       }
     },
     mounted () {
@@ -181,6 +219,11 @@
             padding: 24px;
           }
           .choix-format {
+            &::after {
+              content: '';
+              display: table;
+              clear: both;
+            }
             .choix {
               background-color: white;
               cursor: pointer;
@@ -192,6 +235,12 @@
               text-transform: uppercase;
               font-weight: bold;
               box-shadow: 0 1px 5px -2px black;
+              transition: all 0.5s;
+              border: 2px solid transparent;
+              &.selected {
+                border: 2px solid orange;
+                box-shadow: 0 1px 5px -2px transparent;
+              }
             }
           }
         }
